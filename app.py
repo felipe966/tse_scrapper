@@ -24,8 +24,15 @@ def inspect_csv(csv_file):
 
     try:
         for index, row in df.iterrows():
-            print(index)
             id_str=str(row['cedula'])
+            print(index,': ',id_str)
+            tipo_id=inspect_id(id_str)
+            df.at[index, 'Tipo identificacion'] = tipo_id
+            id_str_tipo=id_str+' - '+tipo_id
+
+            if tipo_id not in  ['Persona física','Persona física - Costarricense Naturalización','Persona física - Partida Especial']:
+                continue
+
             # Navigate to the website
             driver.get("https://servicioselectorales.tse.go.cr/chc/consulta_cedula.aspx")
             # Find the input field for the ID number and enter the ID from the CSV
@@ -33,10 +40,7 @@ def inspect_csv(csv_file):
             id_input.clear()  # Clear any existing input
             id_input.send_keys(id_str)  # Use the 'cedula' column from the CSV
 
-            tipo_id=inspect_id(id_str)
-            df.at[index, 'Tipo identificacion'] = tipo_id
-
-            id_str_tipo=id_str+' - '+tipo_id
+        
 
             # Click the "Consultar" button
             consultar_button = driver.find_element(By.ID, "btnConsultaCedula")
