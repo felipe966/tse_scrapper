@@ -41,17 +41,17 @@ Antes de ejecutar , asegúrate de tener los siguientes requisitos instalados:
 - Google Chrome (para la ejecución del WebDriver de Selenium)
 
 Puedes instalar las bibliotecas de Python utilizando pip:
-```consolepip install requirements.txt```
+``` pip install requirements.txt```
 
 Asegúrate de tener un archivo CSV con una columna llamada "cedula" que contenga las identificaciones que deseas verificar.
 
 Ejecuta el script Python proporcionando el nombre del archivo CSV y el número de hilos (threads) que deseas utilizar para la verificación:
 
-```consolepython script.py nombre_archivo.csv num_threads```
+``` python script.py nombre_archivo.csv num_threads```
 
 Por ejemplo:
 
-```console python script.py identificaciones.csv 4```
+``` python script.py identificaciones.csv 4```
 
 La aplicación dividirá el archivo CSV en partes y ejecutará la verificación en paralelo utilizando el número de hilos especificado. Mostrará los resultados en la consola y generará un archivo CSV llamado "resultado_nombre_archivo.csv" con los resultados de la verificación.
 
