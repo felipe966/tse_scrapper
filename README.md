@@ -43,7 +43,7 @@ Antes de ejecutar , asegúrate de tener los siguientes requisitos instalados:
 Puedes instalar las bibliotecas de Python utilizando pip:
 ``` pip install requirements.txt```
 
-Descargar ChromeDriver y movero a la carpeta del tse_scrapper
+Descargar ChromeDriver y moverlo a la carpeta del tse_scrapper
 
 ChromeDriver: https://chromedriver.chromium.org/downloads
 
