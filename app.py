@@ -2,6 +2,7 @@ import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.options import Options
 import time
 import re
 import sys
@@ -33,7 +34,11 @@ def inspect_id(identificacion):
         return "Tipo de identificación desconocido"
 
 def inspect_csv_partial(df):
-    driver = webdriver.Chrome()
+
+    # Configura las opciones de Chrome para ejecutar en modo sin cabeza
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(options=chrome_options)
     
     # Load the CSV file
 
@@ -137,26 +142,6 @@ def inspect_csv_multi_threaded(csv_file, num_threads):
 
     # Write the result DataFrame to a CSV file
     result_df.to_csv('resultado_' + csv_file, index=False)
-
-def inspect_csv_multi_subprocess(csv_file, num_processes):
-    df = pd.read_csv(csv_file)
-    total_rows = len(df)
-
-    # Divide el DataFrame en partes iguales para cada subprocess
-    chunk_size = total_rows // num_processes
-    futures = []
-
-    with concurrent.futures.ProcessPoolExecutor(max_workers=num_processes) as executor:
-        for i in range(num_processes):
-            start = i * chunk_size
-            end = start + chunk_size if i < num_processes - 1 else total_rows
-            futures.append(executor.submit(inspect_csv_partial, csv_file, start, end))
-
-    # Espera a que todos los subprocesses finalicen
-    for future in concurrent.futures.as_completed(futures):
-        if future.exception() is not None:
-            print("Error in subprocess:", future.exception())
-
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
