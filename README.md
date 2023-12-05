@@ -43,6 +43,10 @@ Antes de ejecutar , asegúrate de tener los siguientes requisitos instalados:
 Puedes instalar las bibliotecas de Python utilizando pip:
 ``` pip install requirements.txt```
 
+Descargar ChromeDriver y movero a la carpeta del tse_scrapper
+
+ChromeDriver: https://chromedriver.chromium.org/downloads
+
 Asegúrate de tener un archivo CSV con una columna llamada "cedula" que contenga las identificaciones que deseas verificar.
 
 Ejecuta el script Python proporcionando el nombre del archivo CSV y el número de hilos (threads) que deseas utilizar para la verificación:
